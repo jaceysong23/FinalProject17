@@ -5,7 +5,7 @@ import time
 # list of items
 items = ["banana", "3 bananas", "Freeze Ray", "Lipstick Taser", "Jelly Gun", "Flamethrower", "Cell Key", "Polkadotted Crowbar", "pencil"]
 ##List of enemies
-enemies = ['evil minions, El Macho']
+enemies = ["evil minion", "El Macho"]
 ##Items needed to win: Cell Key to get out of cell. Freeze Ray to defeat evil minion 1. Polkadotted Crowbar on door to living room. Jelly Gun on swarm of evil minions in living room. Lipstick Taser on El Macho.
 #Path needed to win: Cell to Dungeon Floor to Upstairs Floor to Yellow Room to Living Room to Front Door.
 
@@ -64,7 +64,7 @@ time.sleep(3)
 
 print("*************")
 
-time.sleep(5)
+time.sleep(4)
 
 print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
 {minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
@@ -88,4 +88,5 @@ print("   ")
 print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
 He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
 time.sleep(2)
-print(f"""Down descends a purple figure....""")
+print(f"""Down descends a purple figure with wild, frizzy hair and protruding crooked teeth. An {enemies[0]}!
+It must have been converted into an evil beast by {enemies[1]} and his potion.""")
