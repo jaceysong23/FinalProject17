@@ -17,14 +17,14 @@ class Weapon:
         self.description = description
 
     def intro(self):
-        print(f"You have obtained the {self.name}. This item {self.description} and inflicts {self.damage} damage on your opponent.")
+        print(f"You have obtained the {self.name}. This item's function is {self.description} and inflicts {self.damage} damage on your opponent.")
 
     def shoot(self):
         print(f"You shot the minion with {self.name}, dealing {self.damage} damage!")
 
-lipsticktaser = Weapon('Lipstick Taser', '25%', "sends a streak of electricity onto your opponent, shocking him/her,")
-freezeray = Weapon('Freeze Ray', '100%', "shoots a ray of ice at your opponent, freezing him/her. This freezeray only has enough ice to shoot one time.")
-jellygun = Weapon('Jelly Gun', '100%', "contains a jelly substance that contains the antidote to the evil minions' disease! Once you shoot it at a purple minion, it will become a regular minion")
+lipsticktaser = Weapon('Lipstick Taser', '25%', "to send a streak of electricity onto your opponent, shocking him/her,")
+freezeray = Weapon('Freeze Ray', '100%', "to shoot a ray of ice at your opponent, freezing him/her. This freezeray only has enough ice to shoot one time,")
+jellygun = Weapon('Jelly Gun', '100%', "shoot a jelly substance that contains the antidote to the evil minions' disease! Once you shoot it at a purple minion, it will become a regular minion")
 
 # class that introduces and describes the rooms
 class Room:
@@ -36,15 +36,15 @@ class Room:
     def intro(self):
         print(f"You are now in the {self.name}. {self.description}.")
 
-    def intro2(self):
+    def floor_items(self):
         print(f"On the floor, you see {self.items}")
 
-diningroom = Room('Dining Room', 'This dining room is relatively small and private, closed off on all sides and painted with garish colors. On top of the wooden dining table hangs a massive, dangling chandelier.', 'a big crowbar.'.)
+diningroom = Room('Dining Room', 'This dining room is relatively small and private, closed off on all sides and painted with garish colors. On top of the wooden dining table hangs a massive, dangling chandelier.', 'a big crowbar.')
 foyer = Room('Foyer', 'This entrance to his house is massive and brightly lit, with smooth, tiled floors and a grandiose staircase', 'a lipstick...could it be the lipstick taser that Gru lost??')
 
 #Class that introduces villains
 class Villain:
-    def __init__(self, name, introduction, health):
+    def __init__(self, name, introduction, weapon, health):
         self.name = name
         self.introduction = introduction
         self.weapon = weapon
@@ -52,20 +52,20 @@ class Villain:
 
     def minionintro(self):
         print(f"{self.introduction}. An {enemies[0]}!")
-        print(f"It is carrying {self.weapon}. It has {self.health}.")
+        print(f"It is carrying {self.weapon}. It has {self.health} health.")
 
     def minionsintro(self):
-        print(f"{self.introduction}. They are carrying {self.weapon}. They all have {self.health}.")
+        print(f"{self.introduction}. They are carrying {self.weapon}. They all have {self.health} health.")
 
     def elmachointro(self):
-        print(f"{self.introduction}. He is carrying {self.weapon}. He has {self.health}.")
+        print(f"{self.introduction}. He is carrying {self.weapon}. He has {self.health} health.")
 
     def update(self, weapon):
         self.health -= weapon.damage
         print(f"EL Macho is now at {self.health} health.")
 
 elmacho = Villain('El Macho', 'His red, skin-tight uniform barely covers his protruding stomach, and his mask stretches across his round head. His moustache curves into an evil grin as he sees {minion}', 'a big flamethrower, aiming straight at you', '100%')
-evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, frizzy hair and protruding crooked teeth', '100%')
+evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, frizzy hair and protruding crooked teeth', 'a crowbar', '100%')
 
 #Machohealth.update(lipsticktaser)
 #Machohealth.update(lipsticktaser)
@@ -84,6 +84,7 @@ def box_choice():
         else:
             print("That is not an option. Try again!")
 
+# a function that allows user to choose what item to pick up
 def dungeon_item():
     while True:
         item_decision = input(f"Which object would you like to pick up for future use?\n **Tip: only one will be able to defeat opponents--use common sense**\n >").lower()
@@ -101,6 +102,47 @@ def dungeon_item():
         else:
             print("That is not an option. Try again!")
             time.sleep(2)
+
+def firstminion():
+    while True:
+        firstfight = input("You only have one way to escape, and that is up the stairs. Do you want to use your weapon?\n >").lower()
+        if firstfight == "yes":
+            print(f"You pull out the {items[2]} jump out from your hiding spot.")
+            shoot = input("Hurry and shoot! (type 'shoot')\n >").lower()
+            if shoot == "shoot":
+                print("The purple minion is now frozen!")
+                time.sleep(2)
+                break
+            else:
+                print("Oh no! The evil minion acted faster than you. In one swift moment, it knocks you out with its crowbar.")
+                # how to go back to beginning????
+                # how to time user reaction??
+        elif firstfight == "no":
+            print("The evil minion sees you hiding and slowly approaches. In one swift moment, it knocks you out with its crowbar.")
+            # how to go back to beginning????
+        else:
+            print("That is not an option. Try again!")
+
+# function that asks if user wants to
+def crowbar():
+    while True:
+        crowbar_decision = input("Now, your freeze gun is useless. Would you like to take the evil minion's crowbar?\n >").lower()
+        if crowbar_decision == "yes":
+            print("Great! Crowbar obtained.")
+            time.sleep(2)
+            break
+        elif crowbar_decision == "no":
+            sure = input("You sure? It might come in handy later on.")
+            if sure == "yes":
+                # how to go backkkkkk
+                break
+            elif sure == "no":
+                print("Okay, crowbar obtained.")
+                break
+            else:
+                print("That is not an option. Try again!")
+        else:
+            print("That is not an option. Try again!")
 
 # Asks the user for their name and saves as player_name
 player_name = input("Welcome to MinionEscape! Please enter your name.\n >").title()
@@ -141,17 +183,35 @@ time.sleep(2)
 print(".....kinda")
 print("   ")
 time.sleep(2)
-print(f"""{minion} finds himself on the cold dungeon floor and sees three items sprawled in front of him: a {items[0]}, {items[2]}, {items[7]}""")
+print(f"""{minion} finds himself on the cold dungeon floor and sees three items sprawled in front of him: {items[0]}, {items[2]}, {items[7]}""")
 time.sleep(2)
 
 # calls dungeon_item()
 dungeon_item()
 print("   ")
-time.sleep(2)
+time.sleep(5)
 
 print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
 He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
-time.sleep(2)
+time.sleep(4)
 evilminion.minionintro()
 
-print(f"It must have been converted into an evil beast by {enemies[1]} and his potion.""")
+print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
+print("   ")
+
+time.sleep(2)
+
+# calls the first minion function
+firstminion()
+
+crowbar()
+
+print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
+He quietly opens the door and walks inside...""")
+print("-----------------------------------------")
+print("  ")
+time.sleep(4)
+
+diningroom.intro()
+
+# how to check depository/status??
