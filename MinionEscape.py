@@ -9,6 +9,7 @@ enemies = ["evil minion", "El Macho"]
 ##Items needed to win: Cell Key to get out of cell. Freeze Ray to defeat evil minion 1. Polkadotted Crowbar on door to living room. Jelly Gun on swarm of evil minions in living room. Lipstick Taser on El Macho.
 #Path needed to win: Cell to Dungeon Floor to Upstairs Floor to Yellow Room to Living Room to Front Door.
 
+###CLASSES###
 # class that involves all weapons used in this game; names and lists its attributes
 class Weapon:
     def __init__(self, name, damage, description):
@@ -70,6 +71,39 @@ evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, fr
 #Machohealth.update(lipsticktaser)
 #Machohealth.update(lipsticktaser)
 
+###FUNCTIONS###
+
+def firstpart():
+    print("*************")
+    time.sleep(4)
+    print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
+    {minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
+    # calls box_choice function
+    box_choice()
+    print("   ")
+
+    print(f"After obtaining the key, {minion} uses it to open the cell door. Hooray, you are free!")
+    time.sleep(2)
+    print(".....kinda")
+    print("   ")
+    time.sleep(2)
+    print(f"""{minion} finds himself on the cold dungeon floor and sees three items sprawled in front of him: {items[0]}, {items[2]}, {items[7]}""")
+    time.sleep(2)
+
+    # calls dungeon_item()
+    dungeon_item()
+    print("   ")
+    time.sleep(8)
+
+    print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
+    He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
+    time.sleep(6)
+    evilminion.minionintro()
+    time.sleep(4)
+    print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
+    print("   ")
+
+    time.sleep(2)
 
 # Creating a function for the box1 or box2 choices; will keep prompting until Box 2
 def box_choice():
@@ -108,18 +142,23 @@ def firstminion():
         firstfight = input("You only have one way to escape, and that is up the stairs. Do you want to use your weapon?\n >").lower()
         if firstfight == "yes":
             print(f"You pull out the {items[2]} jump out from your hiding spot.")
-            shoot = input("Hurry and shoot! (type 'shoot')\n >").lower()
+            start = time.perf_counter()
+            shoot = input("Hurry and shoot! (type 'shoot' within 5 seconds!)\n >").lower()
             if shoot == "shoot":
-                print("The purple minion is now frozen!")
-                time.sleep(2)
-                break
-            else:
-                print("Oh no! The evil minion acted faster than you. In one swift moment, it knocks you out with its crowbar.")
-                # how to go back to beginning????
-                # how to time user reaction??
+                end = time.perf_counter()
+                if end-start <= 5:
+                    print("The purple minion is now frozen!")
+                    time.sleep(2)
+                    break
+                else:
+                    print("""Oh no! The evil minion acted faster than you. In one swift moment, it knocks you out with its crowbar.
+                    You are put back in the cell!""")
+                    firstpart()
+                    break
         elif firstfight == "no":
             print("The evil minion sees you hiding and slowly approaches. In one swift moment, it knocks you out with its crowbar.")
-            # how to go back to beginning????
+            firstpart()
+            break
         else:
             print("That is not an option. Try again!")
 
@@ -144,6 +183,17 @@ def crowbar():
         else:
             print("That is not an option. Try again!")
 
+def secondpart():
+    print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
+    He quietly opens the door and walks inside...""")
+    print("-----------------------------------------")
+    print("  ")
+    time.sleep(4)
+
+    diningroom.intro()
+
+
+###INTRODUCTION###
 # Asks the user for their name and saves as player_name
 player_name = input("Welcome to MinionEscape! Please enter your name.\n >").title()
 
@@ -167,51 +217,14 @@ Your objective is to manuvuer through his mansion and escape out the front door.
 print("   ")
 time.sleep(3)
 
-print("*************")
+# calls the function that starts the actual game...can be used to repeat if player gets captured again
+firstpart()
 
-time.sleep(4)
-
-print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
-{minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
-
-# calls box_choice function
-box_choice()
-print("   ")
-
-print(f"After obtaining the key, {minion} uses it to open the cell door. Hooray, you are free!")
-time.sleep(2)
-print(".....kinda")
-print("   ")
-time.sleep(2)
-print(f"""{minion} finds himself on the cold dungeon floor and sees three items sprawled in front of him: {items[0]}, {items[2]}, {items[7]}""")
-time.sleep(2)
-
-# calls dungeon_item()
-dungeon_item()
-print("   ")
-time.sleep(5)
-
-print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
-He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
-time.sleep(4)
-evilminion.minionintro()
-
-print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
-print("   ")
-
-time.sleep(2)
-
-# calls the first minion function
+# calls the first minion function to battle the first minion
 firstminion()
 
 crowbar()
 
-print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
-He quietly opens the door and walks inside...""")
-print("-----------------------------------------")
-print("  ")
-time.sleep(4)
-
-diningroom.intro()
+secondpart()
 
 # how to check depository/status??
