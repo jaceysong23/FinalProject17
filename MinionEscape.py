@@ -3,7 +3,7 @@
 import time
 
 # list of items
-items = ["banana", "3 bananas", "Freeze Ray", "Lipstick Taser", "Jelly Gun", "Cell Key", "Polkadotted Crowbar", "pencil"]
+items = ["banana", "3 bananas", "Freeze Ray", "Lipstick Taser", "Jelly Gun", "Cell Key", "Polkadotted Crowbar", "pencil", "crowbar"]
 ##List of enemies
 enemies = ["evil minion", "El Macho"]
 ##Items needed to win: Cell Key to get out of cell. Freeze Ray to defeat evil minion 1. Polkadotted Crowbar on door to living room. Jelly Gun on swarm of evil minions in living room. Lipstick Taser on El Macho.
@@ -18,7 +18,7 @@ class Weapon:
         self.description = description
 
     def intro(self):
-        print(f"You have obtained the {self.name}. This item's function is {self.description} and inflicts {self.damage} damage on your opponent.")
+        print(f"You have obtained the {self.name}. This item's function is {self.description} and will inflict {self.damage} damage on your opponent if used.")
 
     def shoot(self):
         print(f"You shot the minion with {self.name}, dealing {self.damage} damage!")
@@ -73,6 +73,7 @@ evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, fr
 
 ###FUNCTIONS###
 
+#-----from Clang to crowbar()-------
 def firstpart():
     print("*************")
     time.sleep(4)
@@ -97,13 +98,18 @@ def firstpart():
 
     print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
     He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
-    time.sleep(6)
+    time.sleep(5)
+
     evilminion.minionintro()
+
     time.sleep(4)
     print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
     print("   ")
 
     time.sleep(2)
+
+    firstminion()
+    crowbar()
 
 # Creating a function for the box1 or box2 choices; will keep prompting until Box 2
 def box_choice():
@@ -121,7 +127,7 @@ def box_choice():
 # a function that allows user to choose what item to pick up
 def dungeon_item():
     while True:
-        item_decision = input(f"Which object would you like to pick up for future use?\n **Tip: only one will be able to defeat opponents--use common sense**\n >").lower()
+        item_decision = input(f"Which object would you like to pick up for future use?\n >").lower()
         if item_decision == "freeze ray":
             print("Nice choice!")
             time.sleep(2)
@@ -142,8 +148,11 @@ def firstminion():
         firstfight = input("You only have one way to escape, and that is up the stairs. Do you want to use your weapon?\n >").lower()
         if firstfight == "yes":
             print(f"You pull out the {items[2]} jump out from your hiding spot.")
+            time.sleep(3)
             start = time.perf_counter()
-            shoot = input("Hurry and shoot! (type 'shoot' within 5 seconds!)\n >").lower()
+            print("Hurry and shoot!")
+            time.sleep(2)
+            shoot = input("""(type 'shoot' within 5 seconds!)\n >""").lower()
             if shoot == "shoot":
                 end = time.perf_counter()
                 if end-start <= 5:
@@ -153,10 +162,16 @@ def firstminion():
                 else:
                     print("""Oh no! The evil minion acted faster than you. In one swift moment, it knocks you out with its crowbar.
                     You are put back in the cell!""")
+                    time.sleep(2)
+                    print("You have to start over now...")
+                    time.sleep(4)
                     firstpart()
                     break
         elif firstfight == "no":
             print("The evil minion sees you hiding and slowly approaches. In one swift moment, it knocks you out with its crowbar.")
+            time.sleep(2)
+            print("You have to start over now...")
+            time.sleep(4)
             firstpart()
             break
         else:
@@ -165,15 +180,16 @@ def firstminion():
 # function that asks if user wants to
 def crowbar():
     while True:
-        crowbar_decision = input("Now, your freeze gun is useless. Would you like to take the evil minion's crowbar?\n >").lower()
+        crowbar_decision = input(f"Now, your freeze gun is useless. Would you like to take the {enemies[0]}'s crowbar?\n >").lower()
         if crowbar_decision == "yes":
             print("Great! Crowbar obtained.")
             time.sleep(2)
             break
         elif crowbar_decision == "no":
-            sure = input("You sure? It might come in handy later on.")
+            sure = input("You sure? It might come in handy later on.\n >")
             if sure == "yes":
-                # how to go backkkkkk
+                print("Okay then.")
+                secondpartnocrowbar()
                 break
             elif sure == "no":
                 print("Okay, crowbar obtained.")
@@ -183,6 +199,41 @@ def crowbar():
         else:
             print("That is not an option. Try again!")
 
+def crowbardecision():
+    while True:
+        usecrowbar = input("Do you want to use your crowbar?\n >").lower()
+        if usecrowbar == "yes":
+            print("Crunch! The door swings open after {minion} forces it with the crowbar.")
+            break
+        elif usecrowbar == "no":
+            print(f"""Okay, now you're stuck here until another evil minion finds you...you don't have an option.""")
+        else:
+            print("That is not an option. Try again!")
+
+def crowbardecision2():
+    print(f"Do you want to go back and retrieve the {items[8]}?")
+    time.sleep(3)
+    while True:
+        start = time.perf_counter()
+        goback = input("If you do, type 'go back' within 10 seconds!)\n >").lower()
+        if goback == "goback":
+            end = time.perf_counter()
+            if end-start <= 10:
+                print("Great! Now you have a {item[8]} to use.")
+                time.sleep(2)
+                break
+            else:
+                print("""Too late! Out of nowhere, an evil minion comes up behind you can knocks you out.""")
+                firstpart()
+                secondpart()
+                break
+        else:
+            print("""Too late! Out of nowhere, an evil minion comes up behind you can knocks you out.
+            You have to restart the game...""")
+            firstpart()
+            secondpart()
+            break
+
 def secondpart():
     print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
     He quietly opens the door and walks inside...""")
@@ -191,7 +242,32 @@ def secondpart():
     time.sleep(4)
 
     diningroom.intro()
+    time.sleep(5)
 
+    print(f"{minion} heads directly for a door to the side of the room.")
+    time.sleep(2)
+    print(f"It's locked! You need to use something to prop it open.")
+    time.sleep(2)
+
+    crowbardecision()
+
+def secondpartnocrowbar():
+    print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
+    He quietly opens the door and walks inside...""")
+    print("-----------------------------------------")
+    print("  ")
+    time.sleep(4)
+
+    diningroom.intro()
+    time.sleep(5)
+
+    print(f"{minion} heads directly for a door to the side of the room.")
+    time.sleep(2)
+    print(f"It's locked! You need to use something to prop it open.")
+    time.sleep(2)
+    print(f"Well, looks like you're stuck here until another {enemies[0]} finds you.")
+
+    crowbardecision2()
 
 ###INTRODUCTION###
 # Asks the user for their name and saves as player_name
@@ -217,14 +293,7 @@ Your objective is to manuvuer through his mansion and escape out the front door.
 print("   ")
 time.sleep(3)
 
-# calls the function that starts the actual game...can be used to repeat if player gets captured again
 firstpart()
-
-# calls the first minion function to battle the first minion
-firstminion()
-
-crowbar()
-
 secondpart()
 
-# how to check depository/status??
+#### how to check depository/status??
