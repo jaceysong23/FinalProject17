@@ -61,11 +61,7 @@ class Villain:
     def elmachointro(self):
         print(f"{self.introduction}. He is carrying {self.weapon}. He has {self.health} health.")
 
-    def update(self, weapon):
-        self.health -= weapon.damage
-        print(f"EL Macho is now at {self.health} health.")
-
-elmacho = Villain('El Macho', 'His red, skin-tight uniform barely covers his protruding stomach, and his mask stretches across his round head. His moustache curves into an evil grin as he sees {minion}', 'a big flamethrower, aiming straight at you', '100%')
+elmacho = Villain('El Macho', "El Macho's red, skin-tight uniform barely covers his protruding stomach, and his mask stretches across his round head. His moustache curves into an evil grin as he sees {minion", 'a big flamethrower, aiming straight at you', '100%')
 evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, frizzy hair and protruding crooked teeth', 'a crowbar', '100%')
 
 ###FUNCTIONS###
@@ -80,11 +76,14 @@ def box_choice():
             break
         elif box_decision == "box 1":
             print("There is nothing in the box. Try again!")
+            time.sleep(1)
+            print("   ")
         else:
             print("That is not an option. Try again!")
 
 # a function that allows user to choose what item to pick up
 def dungeon_item():
+    time.sleep(1)
     while True:
         item_decision = input(f"Which object would you like to pick up for future use?\n >").lower()
         if item_decision == "freeze ray":
@@ -159,6 +158,7 @@ def crowbar():
             print("That is not an option. Try again!")
 
 def crowbardecision():
+    print("   ")
     while True:
         usecrowbar = input("Do you want to use your crowbar?\n >").lower()
         if usecrowbar == "yes":
@@ -166,6 +166,7 @@ def crowbardecision():
             break
         elif usecrowbar == "no":
             print(f"""Okay, now you're stuck here until another evil minion finds you...you don't have an option.""")
+            print("   ")
         else:
             print("That is not an option. Try again!")
 
@@ -188,26 +189,23 @@ def crowbardecision2():
 
 def swarmattack():
     while True:
-        attackone = input("""Quick, type 'shoot'!
+        attackone = input("""Type 'shoot'!
         Keep shooting and entering until all the evil minions are normal again!\n >""").lower()
         if attackone == "shoot":
             print(f"First {items[0]} down! Now again:")
-            time.sleep(2)
             attacktwo = input("""Type 'shoot'!\n >""").lower()
             if attacktwo == "shoot":
                 print(f"Second {items[0]} down! Now again:")
-                time.sleep(2)
                 attackthree = input("""Type 'shoot'!\n >""").lower()
                 if attackthree == "shoot":
                     print(f"Third {items[0]} down! Now another one:")
-                    time.sleep(2)
                     attackfour = input("Type 'shoot'!\n >").lower()
                     if attackfour == "shoot":
                         print(f"Fourth {items[0]} down! One more minion left!")
-                        time.sleep(2)
                         attackfive = input("Type 'shoot'!\n >")
                         if attackfive == "shoot":
-                            print("Success! You have converted all the {itmes[0]} back into good minions.")
+                            print(f"Success! You have converted all the {enemies[0]} back into good minions.")
+                            print("   ")
                             break
                         else:
                             print("**That's not it!")
@@ -221,10 +219,11 @@ def swarmattack():
             print("**That's not it!")
 
 def lipstickchoice():
+    print("   ")
     while True:
         lip_decision = input(f"Do you want to pick up the {items[3]}? It can help you later in your next obstacle.\n >").lower()
         if lip_decision == "yes":
-            print("Great! {items[3]} obtained.")
+            print(f"Great! {items[3]} obtained.")
             time.sleep(2)
             finalpart()
             break
@@ -235,7 +234,7 @@ def lipstickchoice():
                 finalpartnolip()
                 break
             elif sure == "no":
-                print("Okay, {items[3]} obtained.")
+                print(f"Okay, {items[3]} obtained.")
                 finalpart()
                 break
             else:
@@ -252,28 +251,56 @@ def elmachofight():
             print("Good math! Now we have to attack El Macho. \n >")
             start = time.perf_counter()
             tase = input("Attack him! Type 'shoot' within 5 seconds")
-            if end-start <= 5:
+            if tase == "shoot":
                 end = time.perf_counter()
-                print("Nice, three more times")
-                time.sleep(2)
-                start = time.perf_counter()
-                tase2 = input("Type 'shoot'")
                 if end-start <=5:
-                    end = time.perf_counter()
-                    print("Nice, two more times")
+                    print("Nice, three more times")
                     time.sleep(2)
                     start = time.perf_counter()
-                    tase3 = input("Type 'shoot'")
-                    if end-start <=5:
+                    tase2 = input("Type 'shoot'")
+                    if tase2 == "shoot":
                         end = time.perf_counter()
-                        print("Nice, one more time!")
-                        time.sleep(2)
-                        start = time.perf_counter()
-                        tase2 = input("Type 'shoot'")
-                        if end-start <=5:
-                            end = time.per_counter()
-                            print("{enemies[1]} falls rigid to the ground below. You defeated El Macho!")
-                            break
+                        if end-start <= 5:
+                            print("Nice, two more times")
+                            time.sleep(2)
+                            start = time.perf_counter()
+                            tase3 = input("Type 'shoot'")
+                            if tase3 == "shoot":
+                                end = time.perf_counter()
+                                if end-start <= 5:
+                                    print("Nice, one more time!")
+                                    time.sleep(2)
+                                    start = time.perf_counter()
+                                    tase4 = input("Type 'shoot'")
+                                    if tase4 == "shoot":
+                                        end = time.per_counter()
+                                        if end-start <= 5:
+                                            print("{enemies[1]} falls rigid to the ground below. You defeated El Macho!")
+                                            break
+                                        else:
+                                            print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
+                                            You are put to be put back in the cell!""")
+                                            time.sleep(2)
+                                            print("You have to start over now...")
+                                            time.sleep(4)
+                                            firstpart()
+                                            secondpart()
+                                            thirdpart()
+                                            break
+                                    else:
+                                        print("That is not the right word.")
+                                else:
+                                    print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
+                                    You are put to be put back in the cell!""")
+                                    time.sleep(2)
+                                    print("You have to start over now...")
+                                    time.sleep(4)
+                                    firstpart()
+                                    secondpart()
+                                    thirdpart()
+                                    break
+                            else:
+                                print("""That is not the right word.""")
                         else:
                             print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
                             You are put to be put back in the cell!""")
@@ -285,15 +312,7 @@ def elmachofight():
                             thirdpart()
                             break
                     else:
-                        print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
-                        You are put to be put back in the cell!""")
-                        time.sleep(2)
-                        print("You have to start over now...")
-                        time.sleep(4)
-                        firstpart()
-                        secondpart()
-                        thirdpart()
-                        break
+                        print("That is not the right word.")
                 else:
                     print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
                     You are put to be put back in the cell!""")
@@ -305,15 +324,7 @@ def elmachofight():
                     thirdpart()
                     break
             else:
-                print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
-                You are put to be put back in the cell!""")
-                time.sleep(2)
-                print("You have to start over now...")
-                time.sleep(4)
-                firstpart()
-                secondpart()
-                thirdpart()
-                break
+                print("That is not the right word.")
         else:
             print("Nope that's not it...Try again.")
 
@@ -342,10 +353,10 @@ def firstpart():
     print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
     He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
     time.sleep(5)
-
+    print("   ")
     evilminion.minionintro()
 
-    time.sleep(4)
+    time.sleep(5)
     print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
     print("   ")
     time.sleep(2)
@@ -363,11 +374,11 @@ def secondpart():
 
     diningroom.intro()
     time.sleep(5)
+    print("   ")
 
     print(f"{minion} heads directly for a door to the side of the room.")
-    time.sleep(2)
     print(f"It's locked! You need to use something to prop it open.")
-    time.sleep(2)
+    time.sleep(6)
 
     crowbardecision()
 
@@ -390,28 +401,38 @@ def secondpartnocrowbar():
     crowbardecision2()
 
 def thirdpart():
-    time.sleep(3)
-    foyer.intro()
+    print("-----------------------------------------------")
     time.sleep(5)
+    foyer.intro()
+    time.sleep(6)
+    print("   ")
     print(f"""Looking down, {minion} sees a {items[4]} on the floor nearby. It must have been left by a good minion trying to
     escape beforehand!""")
-    time.sleep(3)
+    time.sleep(7)
+    print("   ")
+
+    print(f"{minion} bends down to retrieve the jelly gun.")
     jellygun.intro()
-    time.sleep(5)
+    time.sleep(10)
+    print("   ")
+
     print(f"""Right after {minion} picks up the {items[4]}, he hears a rumbling sound. A group of angry purple minions
     have spotted him and are stampeding towards {minion}!""")
-    time.sleep(2)
+    time.sleep(4)
 
     swarmattack()
-
+    print("   ")
+    time.sleep(2)
     print(f"""Good job! {minion} doesn't stop to celebrate, though, for he heads straight for the front door.
     But just as he was about to reach it, something catches his eye...""")
     time.sleep(6)
     print(f"""Out of the corner of his eyes, he sees a shiny, red object laying about three feet to the right.""")
     time.sleep(3)
-    lipsticktaser.intro()
+    print("Could it be the Lipstick Taser that Gru left...?")
 
     lipstickchoice()
+    print("   ")
+    lipsticktaser.intro()
 
 def finalpart():
     print(f"Just as {minion} gets up after picking it up, a large, booming voice rings out from in front.")
@@ -424,7 +445,7 @@ def finalpart():
     print(f"{minion} grows cold as he realizes who it is...El Macho, the villain who trapped him!")
     time.sleep(2)
 
-    elmacho.intro()
+    elmacho.elmachointro()
     time.sleep(5)
 
     print(f"{minion} realizes that his jelly gun doesn't work on {enemies[1]} because El Macho is not purple!")
@@ -433,18 +454,37 @@ def finalpart():
     print("   ")
 
     time.sleep(3)
-    print("You have to use your {items[3]}!")
+    print(f"You have to use your {items[3]}!")
+
+    elmachofight()
 
 def finalpartnolip():
-    print(f"Just as {minion} gets up after picking it up, a large, booming voice rings out from in front.")
-    time.sleep(2)
+    print(f"Just as {minion} looks up again, a large, booming voice rings out from in front.")
+    time.sleep(3)
     print("   ")
     print('"Well well well, what do we have here? An escaping minion, is it?"')
-    time.sleep(2)
+    time.sleep(3)
     print("   ")
     print(f"{minion} grows cold as he realizes who it is...El Macho, the villain who trapped him!")
+    time.sleep(5)
+    elmacho.elmachointro()
+    time.sleep(7)
+
+    print("   ")
+    print(f"Panicking, {minion} realizes that his jelly gun doesn't work on {enemies[1]} because El Macho is not purple!")
+    time.sleep(4)
+    print("But he doesn't have any other weapon to use...")
     time.sleep(2)
-    elmacho.intro()
+    print("   ")
+    print(f"El Macho activates his Flamethrower and knocks {minion} out with one blow.")
+    time.sleep(2)
+    print("   ")
+    print("You have to start over now...")
+    time.sleep(4)
+    print("   ")
+    firstpart()
+    secondpart()
+    thirdpart()
 
 ###START OF GAME###
 # Asks the user for their name and saves as player_name
@@ -468,7 +508,7 @@ print("""{} has just been captured by villain EL Macho.
 Your objective is to manuvuer through his mansion and escape out the front door. You will meet several obstacles along the way.""".format(minion))
 
 print("   ")
-time.sleep(3)
+time.sleep(7)
 
 firstpart()
 secondpart()
@@ -477,5 +517,5 @@ thirdpart()
 # THE ENDING #
 print(f"{minion} opens the front door and finally escapes!")
 time.sleep(2)
-print(f"Congradulations {player_name}, you completed the game!")
+print(f"Congradulations {player_name}, you completed the game! Thanks for playing :)")
 #### how to check depository/status??
