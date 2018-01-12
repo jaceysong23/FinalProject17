@@ -73,44 +73,6 @@ evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, fr
 
 ###FUNCTIONS###
 
-#-----from Clang to crowbar()-------
-def firstpart():
-    print("*************")
-    time.sleep(4)
-    print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
-    {minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
-    # calls box_choice function
-    box_choice()
-    print("   ")
-
-    print(f"After obtaining the key, {minion} uses it to open the cell door. Hooray, you are free!")
-    time.sleep(2)
-    print(".....kinda")
-    print("   ")
-    time.sleep(2)
-    print(f"""{minion} finds himself on the cold dungeon floor and sees three items sprawled in front of him: {items[0]}, {items[2]}, {items[7]}""")
-    time.sleep(2)
-
-    # calls dungeon_item()
-    dungeon_item()
-    print("   ")
-    time.sleep(8)
-
-    print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
-    He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
-    time.sleep(5)
-
-    evilminion.minionintro()
-
-    time.sleep(4)
-    print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
-    print("   ")
-
-    time.sleep(2)
-
-    firstminion()
-    crowbar()
-
 # Creating a function for the box1 or box2 choices; will keep prompting until Box 2
 def box_choice():
     while True:
@@ -147,7 +109,7 @@ def firstminion():
     while True:
         firstfight = input("You only have one way to escape, and that is up the stairs. Do you want to use your weapon?\n >").lower()
         if firstfight == "yes":
-            print(f"You pull out the {items[2]} jump out from your hiding spot.")
+            print(f"You pull out the {items[2]} and jump out from your hiding spot.")
             time.sleep(3)
             start = time.perf_counter()
             print("Hurry and shoot!")
@@ -203,7 +165,7 @@ def crowbardecision():
     while True:
         usecrowbar = input("Do you want to use your crowbar?\n >").lower()
         if usecrowbar == "yes":
-            print("Crunch! The door swings open after {minion} forces it with the crowbar.")
+            print(f"Crunch! The door swings open after {minion} forces it with the crowbar.")
             break
         elif usecrowbar == "no":
             print(f"""Okay, now you're stuck here until another evil minion finds you...you don't have an option.""")
@@ -211,28 +173,58 @@ def crowbardecision():
             print("That is not an option. Try again!")
 
 def crowbardecision2():
-    print(f"Do you want to go back and retrieve the {items[8]}?")
-    time.sleep(3)
+    print(f"Do you want to go back and retrieve the {items[8]}? If you do...")
+    time.sleep(5)
     while True:
         start = time.perf_counter()
-        goback = input("If you do, type 'go back' within 10 seconds!)\n >").lower()
-        if goback == "goback":
+        goback = input("Type 'go back' within 5 seconds!)\n >").lower()
+        if goback == "go back":
             end = time.perf_counter()
-            if end-start <= 10:
-                print("Great! Now you have a {item[8]} to use.")
+            if end-start <= 5:
+                print(f"Great! Now you have a {items[8]} to use.")
                 time.sleep(2)
                 break
             else:
                 print("""Too late! Out of nowhere, an evil minion comes up behind you can knocks you out.""")
                 firstpart()
-                secondpart()
                 break
-        else:
-            print("""Too late! Out of nowhere, an evil minion comes up behind you can knocks you out.
-            You have to restart the game...""")
-            firstpart()
-            secondpart()
-            break
+
+def firstpart():
+    print("*************")
+    time.sleep(4)
+    print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
+    {minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
+    # calls box_choice function
+    box_choice()
+    print("   ")
+
+    print(f"After obtaining the key, {minion} uses it to open the cell door. Hooray, you are free!")
+    time.sleep(2)
+    print(".....kinda")
+    print("   ")
+    time.sleep(2)
+    print(f"""{minion} finds himself on the cold dungeon floor and sees three items sprawled in front of him: {items[0]}, {items[2]}, {items[7]}""")
+    time.sleep(2)
+
+    # calls dungeon_item()
+    dungeon_item()
+    print("   ")
+    time.sleep(8)
+
+    print(f"""Glancing around the dark, eerie chamber, {minion} realizes that there is only one way out of the dungeon: up the stairs.
+    He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
+    time.sleep(5)
+
+    evilminion.minionintro()
+
+    time.sleep(4)
+    print(f"It must have been converted into an evil beast by {enemies[1]} and his potion!""")
+    print("   ")
+    time.sleep(2)
+
+    firstminion()
+
+    crowbar()
 
 def secondpart():
     print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
@@ -264,10 +256,25 @@ def secondpartnocrowbar():
     print(f"{minion} heads directly for a door to the side of the room.")
     time.sleep(2)
     print(f"It's locked! You need to use something to prop it open.")
-    time.sleep(2)
+    time.sleep(4)
     print(f"Well, looks like you're stuck here until another {enemies[0]} finds you.")
 
     crowbardecision2()
+
+def thirdpart():
+    time.sleep(3)
+    foyer.intro()
+    time.sleep(5)
+    print(f"""Looking down, {minion} sees a {items[4]} on the floor nearby. It must have been left by a good minion trying to
+    escape beforehand!""")
+    time.sleep(3)
+    jellygun.intro()
+    time.sleep(5)
+    print(f"""Right after {minion} picks up the {items[4]}, he hears a rumbling sound. A swarm of angry purple minions
+    have spotted him and are stampeding towards {minion}!""")
+    time.sleep(2)
+    print("""Quick, type 'shoot'!
+    Keep shooting and entering until all the evil minions are normal again!""")
 
 ###INTRODUCTION###
 # Asks the user for their name and saves as player_name
