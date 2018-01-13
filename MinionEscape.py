@@ -61,7 +61,7 @@ class Villain:
     def elmachointro(self):
         print(f"{self.introduction}. He is carrying {self.weapon}. He has {self.health} health.")
 
-elmacho = Villain('El Macho', "El Macho's red, skin-tight uniform barely covers his protruding stomach, and his mask stretches across his round head. His moustache curves into an evil grin as he sees {minion", 'a big flamethrower, aiming straight at you', '100%')
+elmacho = Villain('El Macho', "El Macho's red, skin-tight uniform barely covers his protruding stomach, and his mask stretches across his round head. His moustache curves into an evil grin as he sees you", 'a big flamethrower, aiming straight at you', '100%')
 evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, frizzy hair and protruding crooked teeth', 'a crowbar', '100%')
 
 ###FUNCTIONS###
@@ -189,20 +189,20 @@ def crowbardecision2():
 
 def swarmattack():
     while True:
-        attackone = input("""Type 'shoot'!
+        attackone = input("""Type 'shoot'! (not timed)
         Keep shooting and entering until all the evil minions are normal again!\n >""").lower()
         if attackone == "shoot":
-            print(f"First {items[0]} down! Now again:")
-            attacktwo = input("""Type 'shoot'!\n >""").lower()
+            print(f"First {enemies[0]} down! Now again:")
+            attacktwo = input("""   Type 'shoot'!\n >""").lower()
             if attacktwo == "shoot":
-                print(f"Second {items[0]} down! Now again:")
-                attackthree = input("""Type 'shoot'!\n >""").lower()
+                print(f"Second {enemies[0]} down! Now again:")
+                attackthree = input("""    Type 'shoot'!\n >""").lower()
                 if attackthree == "shoot":
-                    print(f"Third {items[0]} down! Now another one:")
-                    attackfour = input("Type 'shoot'!\n >").lower()
+                    print(f"Third {enemies[0]} down! Now another one:")
+                    attackfour = input("    Type 'shoot'!\n >").lower()
                     if attackfour == "shoot":
-                        print(f"Fourth {items[0]} down! One more minion left!")
-                        attackfive = input("Type 'shoot'!\n >")
+                        print(f"Fourth {enemies[0]} down! One more minion left!")
+                        attackfive = input("    Type 'shoot'!\n >")
                         if attackfive == "shoot":
                             print(f"Success! You have converted all the {enemies[0]} back into good minions.")
                             print("   ")
@@ -252,23 +252,23 @@ def elmachofight():
             print("   ")
             time.sleep(2)
             start = time.perf_counter()
-            tase = input("Attack him! Type 'shoot' within 5 seconds\n >")
-            if tase == "shoot":
+            tase = input("Attack him! Type 'tase' within 5 seconds\n >")
+            if tase == "tase":
                 end = time.perf_counter()
                 if end-start <=5:
                     start = time.perf_counter()
-                    tase2 = input("Nice, three more times--Type 'shoot' within 5 seconds\n >")
-                    if tase2 == "shoot":
+                    tase2 = input("Nice, three more times--Type 'tase' within 5 seconds\n >")
+                    if tase2 == "tase":
                         end = time.perf_counter()
                         if end-start <= 5:
                             start = time.perf_counter()
-                            tase3 = input("Nice, two more times--Type 'shoot' within 5 seconds\n >")
-                            if tase3 == "shoot":
+                            tase3 = input("Nice, two more times--Type 'tase' within 5 seconds\n >")
+                            if tase3 == "tase":
                                 end = time.perf_counter()
                                 if end-start <= 5:
                                     start = time.perf_counter()
-                                    tase4 = input("Nice, one more time--Type 'shoot' within 5 seconds\n >")
-                                    if tase4 == "shoot":
+                                    tase4 = input("Nice, one more time--Type 'tase' within 5 seconds\n >")
+                                    if tase4 == "tase":
                                         end = time.perf_counter()
                                         if end-start <= 5:
                                             print(f"{enemies[1]} falls rigid to the ground below. You defeated El Macho!")
@@ -326,7 +326,7 @@ def elmachofight():
 
 def firstpart():
     print("*************")
-    time.sleep(4)
+    time.sleep(2)
     print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
     {minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
     # calls box_choice function
@@ -428,9 +428,10 @@ def thirdpart():
 
     lipstickchoice()
     print("   ")
-    lipsticktaser.intro()
 
 def finalpart():
+    lipsticktaser.intro()
+    time.sleep(6)
     print(f"Just as {minion} gets up after picking it up, a large, booming voice rings out from in front.")
     time.sleep(2)
     print("   ")
@@ -444,9 +445,10 @@ def finalpart():
     elmacho.elmachointro()
     time.sleep(7)
 
+    print("   ")
     print(f"{minion} realizes that his jelly gun doesn't work on {enemies[1]} because El Macho is not purple!")
     time.sleep(3)
-    print(f"...and because he didn't TURN evil, he IS evil")
+    print(f"...and because he didn't TURN evil; he IS evil")
     print("   ")
 
     time.sleep(3)
@@ -493,7 +495,7 @@ print("Hello, {}!".format(player_name))
 
 # Asks for character name and saves as character_name
 minion = input("Which minion would you like to be: Stuart, Kevin, or Bob?\n >").title()
-elmachofight()
+
 # an intro for the game
 print("Great! Your minion's name is {}, and {} is ready for action!".format(minion, minion))
 print("   ")
@@ -505,7 +507,7 @@ print("""{} has just been captured by villain EL Macho.
 Your objective is to manuvuer through his mansion and escape out the front door. You will meet several obstacles along the way.""".format(minion))
 
 print("   ")
-time.sleep(7)
+time.sleep(5)
 
 firstpart()
 secondpart()
