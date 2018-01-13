@@ -109,7 +109,7 @@ def firstminion():
             time.sleep(3)
             start = time.perf_counter()
             print("Hurry and shoot!")
-            time.sleep(2)
+            time.sleep(1)
             shoot = input("""(type 'shoot' within 5 seconds!)\n >""").lower()
             if shoot == "shoot":
                 end = time.perf_counter()
@@ -246,36 +246,32 @@ def elmachofight():
     while True:
         print(f"You pull out your {items[3]} and face EL Macho.")
         time.sleep(3)
-        math = input("""Since the {items[3]} only deals 25% damage, how many times do you need to tase the enemy?\n >""").lower()
+        math = input(f"""Since the {items[3]} only deals 25% damage, how many times do you need to tase the enemy (who has 100% health)?\n >""").lower()
         if math == "4":
-            print("Good math! Now we have to attack El Macho. \n >")
+            print("Good math! Now we have to attack El Macho.")
+            print("   ")
+            time.sleep(2)
             start = time.perf_counter()
-            tase = input("Attack him! Type 'shoot' within 5 seconds")
+            tase = input("Attack him! Type 'shoot' within 5 seconds\n >")
             if tase == "shoot":
                 end = time.perf_counter()
                 if end-start <=5:
-                    print("Nice, three more times")
-                    time.sleep(2)
                     start = time.perf_counter()
-                    tase2 = input("Type 'shoot'")
+                    tase2 = input("Nice, three more times--Type 'shoot' within 5 seconds\n >")
                     if tase2 == "shoot":
                         end = time.perf_counter()
                         if end-start <= 5:
-                            print("Nice, two more times")
-                            time.sleep(2)
                             start = time.perf_counter()
-                            tase3 = input("Type 'shoot'")
+                            tase3 = input("Nice, two more times--Type 'shoot' within 5 seconds\n >")
                             if tase3 == "shoot":
                                 end = time.perf_counter()
                                 if end-start <= 5:
-                                    print("Nice, one more time!")
-                                    time.sleep(2)
                                     start = time.perf_counter()
-                                    tase4 = input("Type 'shoot'")
+                                    tase4 = input("Nice, one more time--Type 'shoot' within 5 seconds\n >")
                                     if tase4 == "shoot":
-                                        end = time.per_counter()
+                                        end = time.perf_counter()
                                         if end-start <= 5:
-                                            print("{enemies[1]} falls rigid to the ground below. You defeated El Macho!")
+                                            print(f"{enemies[1]} falls rigid to the ground below. You defeated El Macho!")
                                             break
                                         else:
                                             print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
@@ -294,7 +290,7 @@ def elmachofight():
                                     You are put to be put back in the cell!""")
                                     time.sleep(2)
                                     print("You have to start over now...")
-                                    time.sleep(4)
+                                    time.sleep(1)
                                     firstpart()
                                     secondpart()
                                     thirdpart()
@@ -306,7 +302,7 @@ def elmachofight():
                             You are put to be put back in the cell!""")
                             time.sleep(2)
                             print("You have to start over now...")
-                            time.sleep(4)
+                            time.sleep(1)
                             firstpart()
                             secondpart()
                             thirdpart()
@@ -318,7 +314,7 @@ def elmachofight():
                     You are put to be put back in the cell!""")
                     time.sleep(2)
                     print("You have to start over now...")
-                    time.sleep(4)
+                    time.sleep(1)
                     firstpart()
                     secondpart()
                     thirdpart()
@@ -443,18 +439,19 @@ def finalpart():
 
     print("   ")
     print(f"{minion} grows cold as he realizes who it is...El Macho, the villain who trapped him!")
-    time.sleep(2)
+    time.sleep(3)
 
     elmacho.elmachointro()
-    time.sleep(5)
+    time.sleep(7)
 
     print(f"{minion} realizes that his jelly gun doesn't work on {enemies[1]} because El Macho is not purple!")
-    time.sleep(2)
+    time.sleep(3)
     print(f"...and because he didn't TURN evil, he IS evil")
     print("   ")
 
     time.sleep(3)
     print(f"You have to use your {items[3]}!")
+    time.sleep(2)
 
     elmachofight()
 
@@ -496,7 +493,7 @@ print("Hello, {}!".format(player_name))
 
 # Asks for character name and saves as character_name
 minion = input("Which minion would you like to be: Stuart, Kevin, or Bob?\n >").title()
-
+elmachofight()
 # an intro for the game
 print("Great! Your minion's name is {}, and {} is ready for action!".format(minion, minion))
 print("   ")
