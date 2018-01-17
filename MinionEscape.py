@@ -17,12 +17,14 @@ class Weapon:
         self.damage = damage
         self.description = description
 
+    # introduces the weapon; what it does, how much damage it does
     def intro(self):
         print(f"You have obtained the {self.name}. This item's function is {self.description} and will inflict {self.damage} damage on your opponent if used.")
-
+    # gives the stats for how much you affected the opponent
     def shoot(self):
         print(f"You shot the minion with {self.name}, dealing {self.damage} damage!")
 
+# the weapons that minion needs to pick up and use, plus their stats, use, description
 lipsticktaser = Weapon('Lipstick Taser', '25%', "to send a streak of electricity onto your opponent, shocking him/her,")
 freezeray = Weapon('Freeze Ray', '100%', "to shoot a ray of ice at your opponent, freezing him/her. This freezeray only has enough ice to shoot one time,")
 jellygun = Weapon('Jelly Gun', '100%', "shoot a jelly substance that contains the antidote to the evil minions' disease! Once you shoot it at a purple minion, it will become a regular minion")
@@ -33,13 +35,13 @@ class Room:
         self.name = name
         self.description = description
         self.items = items
-
+    #introduces the rooms
     def intro(self):
         print(f"You are now in the {self.name}. {self.description}.")
-
+    #if there are items are on the floor, this can be used to list them for user
     def floor_items(self):
         print(f"On the floor, you see {self.items}")
-
+#there are two rooms and their descriptions:
 diningroom = Room('Dining Room', 'This dining room is relatively small and private, closed off on all sides and painted with garish colors. On top of the wooden dining table hangs a massive, dangling chandelier.', 'a big crowbar.')
 foyer = Room('Foyer', 'This entrance to his house is massive and brightly lit, with smooth, tiled floors and a grandiose staircase', 'a lipstick...could it be the lipstick taser that Gru lost??')
 
@@ -50,14 +52,14 @@ class Villain:
         self.introduction = introduction
         self.weapon = weapon
         self.health = health
-
+    # specific intro for the first minion
     def minionintro(self):
         print(f"{self.introduction}. An {enemies[0]}!")
         print(f"It is carrying {self.weapon}. It has {self.health} health.")
-
+    # intro for the group of minions
     def minionsintro(self):
         print(f"{self.introduction}. They are carrying {self.weapon}. They all have {self.health} health.")
-
+    # intro for El Macho
     def elmachointro(self):
         print(f"{self.introduction}. He is carrying {self.weapon}. He has {self.health} health.")
 
@@ -67,6 +69,7 @@ evilminion = Villain('Evil Minion', 'Down descends a purple figure with wild, fr
 ###FUNCTIONS###
 
 # Creating a function for the box1 or box2 choices; will keep prompting until Box 2
+# .lower() allows user to type in lower case
 def box_choice():
     while True:
         box_decision = input("Which box would you like to investigate: Box 1 or Box 2?\n >").lower()
@@ -81,7 +84,7 @@ def box_choice():
         else:
             print("That is not an option. Try again!")
 
-# a function that allows user to choose what item to pick up
+# a function that allows user to choose what item to pick up...will keep asking until you choose Freeze Ray
 def dungeon_item():
     time.sleep(1)
     while True:
@@ -101,6 +104,7 @@ def dungeon_item():
             print("That is not an option. Try again!")
             time.sleep(2)
 
+#this is the fight with the first purple minion
 def firstminion():
     while True:
         firstfight = input("You only have one way to escape, and that is up the stairs. Do you want to use your weapon?\n >").lower()
@@ -125,6 +129,7 @@ def firstminion():
                     time.sleep(4)
                     firstpart()
                     break
+        #sends back to start cell
         elif firstfight == "no":
             print("The evil minion sees you hiding and slowly approaches. In one swift moment, it knocks you out with its crowbar.")
             time.sleep(2)
@@ -132,10 +137,11 @@ def firstminion():
             time.sleep(4)
             firstpart()
             break
+        # for any senseless answer...circles back
         else:
             print("That is not an option. Try again!")
 
-# function that asks if user wants to
+# function that asks if user wants to pick up a crowbar for future use
 def crowbar():
     while True:
         crowbar_decision = input(f"Now, your freeze gun is useless. Would you like to take the {enemies[0]}'s crowbar?\n >").lower()
@@ -147,6 +153,7 @@ def crowbar():
             sure = input("You sure? It might come in handy later on.\n >")
             if sure == "yes":
                 print("Okay then.")
+                #takes user to a second track, which is the same until you reach the door and need to cycle back to retrieve crowbar
                 secondpartnocrowbar()
                 break
             elif sure == "no":
@@ -157,6 +164,8 @@ def crowbar():
         else:
             print("That is not an option. Try again!")
 
+# asks if user wants to use crowbar or not, then carries on to thirdpart()
+# regular path if minion already has crowbar
 def crowbardecision():
     print("   ")
     while True:
@@ -170,6 +179,7 @@ def crowbardecision():
         else:
             print("That is not an option. Try again!")
 
+# second path if minion did not pick up crowbar initially
 def crowbardecision2():
     print(f"Do you want to go back and retrieve the {items[8]}? If you do...")
     time.sleep(5)
@@ -178,19 +188,24 @@ def crowbardecision2():
         goback = input("Type 'go back' within 5 seconds!)\n >").lower()
         if goback == "go back":
             end = time.perf_counter()
+            # times the reaction...need to be within 5 seconds
             if end-start <= 5:
                 print(f"Great! Now you have a {items[8]} to use.")
                 time.sleep(2)
                 break
+            #sends back to beginning
             else:
                 print("""Too late! Out of nowhere, an evil minion comes up behind you can knocks you out.""")
                 firstpart()
                 break
 
+# the attack of many minions on user minion
 def swarmattack():
     while True:
         attackone = input("""Type 'shoot'! (not timed)
         Keep shooting and entering until all the evil minions are normal again!\n >""").lower()
+        # not timed...need to shoot and convert 5 minions
+        # not possible to mess up and restart because will ask to 'shoot' continuously
         if attackone == "shoot":
             print(f"First {enemies[0]} down! Now again:")
             attacktwo = input("""   Type 'shoot'!\n >""").lower()
@@ -218,6 +233,8 @@ def swarmattack():
         else:
             print("**That's not it!")
 
+# defines function that asks if you want to pick up the lipstick taser, which will come to use later
+# if you do not want it, then game will continue to finalpartnolip(), which will eventually send you back because no weapon
 def lipstickchoice():
     print("   ")
     while True:
@@ -242,6 +259,8 @@ def lipstickchoice():
         else:
             print("That is not an option. Try again!")
 
+# the final fight that will either send you back or set you free! Must type 'tase' four times, each within 5 seconds, in order to defeat El Macho
+# First asks how many times to tase El Macho with only 25% attack every time. Must answer '4'
 def elmachofight():
     while True:
         print(f"You pull out your {items[3]} and face EL Macho.")
@@ -273,6 +292,7 @@ def elmachofight():
                                         if end-start <= 5:
                                             print(f"{enemies[1]} falls rigid to the ground below. You defeated El Macho!")
                                             break
+                                        # sends him back to cell for every time you do not type within 5 seconds
                                         else:
                                             print("""Oh no! El Macho acted faster than you. In one swift moment, it knocks you out with his big fists.
                                             You are put to be put back in the cell!""")
@@ -324,8 +344,12 @@ def elmachofight():
         else:
             print("Nope that's not it...Try again.")
 
+# This is the first part function that includes all the functions and print() commands for the game to run
+# easier to call rather than typing all separate functions and spaces and time.sleep()s every time need to restart
+# first function that is actually called
 def firstpart():
     print("*************")
+    # lets program wait 2 seconds before continuing
     time.sleep(2)
     print(f"""Clang! The door of the cage slams shut behind {minion} as {minion} is thrust into the cell, locking him inside.
     {minion} is trapped in the dungeons of El Macho's mansion! Looking around, {minion} sees that there are two wooden boxes in your cell.""")
@@ -350,6 +374,7 @@ def firstpart():
     He carefully tiptoes to the base of the stairs, then dashes to the shadows when he hears footsteps.""")
     time.sleep(5)
     print("   ")
+    # introduces the first evil minion by using class
     evilminion.minionintro()
 
     time.sleep(5)
@@ -357,10 +382,13 @@ def firstpart():
     print("   ")
     time.sleep(2)
 
+    # calls first minion attack function
     firstminion()
-
+    # calls crowbar()
     crowbar()
 
+# This is the second part function that includes all the functions and print() commands for the game to run second part
+# easier to call rather than typing all separate functions and spaces and time.sleep()s every time need to restart
 def secondpart():
     print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
     He quietly opens the door and walks inside...""")
@@ -368,6 +396,7 @@ def secondpart():
     print("  ")
     time.sleep(4)
 
+    # introduces the dining room
     diningroom.intro()
     time.sleep(5)
     print("   ")
@@ -376,8 +405,10 @@ def secondpart():
     print(f"It's locked! You need to use something to prop it open.")
     time.sleep(6)
 
+    # calls the crowbardecision() to ask if user wants to use crowbar or not
     crowbardecision()
 
+# second option for secondpart() but this time if minion does not have crowbar
 def secondpartnocrowbar():
     print(f"""{minion} steps around the frozen minion's body and stealthily ascends up the stairs.
     He quietly opens the door and walks inside...""")
@@ -385,6 +416,7 @@ def secondpartnocrowbar():
     print("  ")
     time.sleep(4)
 
+    #same...introduces dining room
     diningroom.intro()
     time.sleep(5)
 
@@ -394,11 +426,15 @@ def secondpartnocrowbar():
     time.sleep(4)
     print(f"Well, looks like you're stuck here until another {enemies[0]} finds you.")
 
+    #second crowbardecision function that asks whether you want to go back to retieve...if not, will send you back to beginning
     crowbardecision2()
 
+# This is the first part function that includes all the functions and print() commands for the game to run
+# easier to call rather than typing all separate functions and spaces and time.sleep()s every time need to restart
 def thirdpart():
     print("-----------------------------------------------")
     time.sleep(5)
+    #introduces foyer
     foyer.intro()
     time.sleep(6)
     print("   ")
@@ -408,6 +444,7 @@ def thirdpart():
     print("   ")
 
     print(f"{minion} bends down to retrieve the jelly gun.")
+    # introduces jellygun
     jellygun.intro()
     time.sleep(10)
     print("   ")
@@ -416,6 +453,7 @@ def thirdpart():
     have spotted him and are stampeding towards {minion}!""")
     time.sleep(4)
 
+    #calls the attack with a group of minions
     swarmattack()
     print("   ")
     time.sleep(2)
@@ -426,10 +464,14 @@ def thirdpart():
     time.sleep(3)
     print("Could it be the Lipstick Taser that Gru left...?")
 
+    #calls lipstickchoice() to pick up lipstick taser or not...if not, goes to finalpartnolip()
     lipstickchoice()
     print("   ")
 
+#final part of game, which includes the fight with El Macho
+# is accessed within thirdpart()
 def finalpart():
+    # introduces lipsticktaser
     lipsticktaser.intro()
     time.sleep(6)
     print(f"Just as {minion} gets up after picking it up, a large, booming voice rings out from in front.")
@@ -442,6 +484,7 @@ def finalpart():
     print(f"{minion} grows cold as he realizes who it is...El Macho, the villain who trapped him!")
     time.sleep(3)
 
+    #introduces el macho
     elmacho.elmachointro()
     time.sleep(7)
 
@@ -455,6 +498,7 @@ def finalpart():
     print(f"You have to use your {items[3]}!")
     time.sleep(2)
 
+    # the final fight with el macho!
     elmachofight()
 
 def finalpartnolip():
@@ -481,6 +525,9 @@ def finalpartnolip():
     print("You have to start over now...")
     time.sleep(4)
     print("   ")
+
+    # has no weapont to defeat El Macho, so needs to go through firstpart(), secondpart(), and thirdpart()
+    # basically restart everything
     firstpart()
     secondpart()
     thirdpart()
@@ -509,12 +556,12 @@ Your objective is to manuvuer through his mansion and escape out the front door.
 print("   ")
 time.sleep(5)
 
+# these are the only functions that are called, and within these parts are more functions and descriptions
 firstpart()
 secondpart()
 thirdpart()
 
-# THE ENDING #
+##THE ENDING##
 print(f"{minion} opens the front door and finally escapes!")
 time.sleep(2)
 print(f"Congradulations {player_name}, you completed the game! Thanks for playing :)")
-#### how to check depository/status??
