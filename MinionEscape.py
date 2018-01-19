@@ -1,10 +1,9 @@
-# This is me trying to make a game:
-
+# Import time in order to use time.sleep() and timed responses
 import time
 
-# list of items
+# list of items:
 items = ["banana", "3 bananas", "Freeze Ray", "Lipstick Taser", "Jelly Gun", "Cell Key", "Polkadotted Crowbar", "pencil", "crowbar"]
-##List of enemies
+# List of enemies:
 enemies = ["evil minion", "El Macho"]
 ##Items needed to win: Cell Key to get out of cell. Freeze Ray to defeat evil minion 1. Polkadotted Crowbar on door to living room. Jelly Gun on swarm of evil minions in living room. Lipstick Taser on El Macho.
 #Path needed to win: Cell to Dungeon Floor to Upstairs Floor to Yellow Room to Living Room to Front Door.
